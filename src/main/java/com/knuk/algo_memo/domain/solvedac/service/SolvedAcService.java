@@ -1,4 +1,4 @@
-package com.knuk.algo_memo.domain.solvedac;
+package com.knuk.algo_memo.domain.solvedac.service;
 
 import com.knuk.algo_memo.domain.solvedac.dto.ProblemDTO;
 import com.knuk.algo_memo.domain.solvedac.dto.ResponseWrapper;

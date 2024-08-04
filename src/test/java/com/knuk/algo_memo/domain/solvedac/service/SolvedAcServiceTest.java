@@ -1,7 +1,6 @@
 package com.knuk.algo_memo.domain.solvedac.service;
 
 import com.knuk.algo_memo.domain.solvedac.dto.ProblemDTO;
-import com.knuk.algo_memo.domain.solvedac.SolvedAcService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
