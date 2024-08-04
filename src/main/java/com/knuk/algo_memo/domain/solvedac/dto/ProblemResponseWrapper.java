@@ -6,10 +6,10 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class ResponseWrapper {
+public class ProblemResponseWrapper {
     private List<ProblemDTO> problems;
 
-    public ResponseWrapper(@JsonProperty("items") List<ProblemDTO> problems) {
+    public ProblemResponseWrapper(@JsonProperty("items") List<ProblemDTO> problems) {
         this.problems = problems;
     }
 }
