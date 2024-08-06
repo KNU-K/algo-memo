@@ -6,7 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
 
-@Entity
+@Entity(name = "solved_ac")
 @NoArgsConstructor
 @Builder
 @AllArgsConstructor

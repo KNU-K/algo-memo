@@ -25,23 +25,6 @@ public class SolvedAcServiceImpl implements SolvedAcService{
 
     private final RestClient restClient;
 
-
-    private String createQueryString(int problemId) {
-        return UriComponentsBuilder.fromHttpUrl(SolvedAcServiceImpl.REST_URI)
-                .queryParam(QUERY_PARAM_QUERY, problemId)
-                .queryParam(QUERY_PARAM_DIRECTION, "asc")
-                .queryParam(QUERY_PARAM_SORT, "id")
-                .queryParam(QUERY_PARAM_PAGE, 1)
-                .toUriString();
-    }
-    private ProblemDTO extractProblemFromResponse(ProblemResponseWrapper responseWrapper, Integer problemId) {
-        return Optional.ofNullable(responseWrapper)
-                .map(ProblemResponseWrapper::getProblems)
-                .filter(problems -> !problems.isEmpty() && problems.get(0).getId().equals(problemId))
-                .map(problems -> problems.get(0))
-                .orElseThrow(() -> new RuntimeException("Problem with ID " + problemId + " not found"));
-    }
-
     /**
      * TODO-1:
      * 현재 비공식 API 쪽에서 요청으로 다루는 중
@@ -54,6 +37,7 @@ public class SolvedAcServiceImpl implements SolvedAcService{
      * 확장 가능서있게 개발
      *
      */
+
     @Override
     public ProblemDTO searchProblemById(Integer problemId) {
         try {
@@ -73,5 +57,22 @@ public class SolvedAcServiceImpl implements SolvedAcService{
             log.error("Unexpected error occurred while retrieving problem information: {}", e.getMessage());
             throw new RuntimeException("Unexpected error occurred while retrieving problem information", e);
         }}
+
+
+    private String createQueryString(int problemId) {
+        return UriComponentsBuilder.fromHttpUrl(SolvedAcServiceImpl.REST_URI)
+                .queryParam(QUERY_PARAM_QUERY, problemId)
+                .queryParam(QUERY_PARAM_DIRECTION, "asc")
+                .queryParam(QUERY_PARAM_SORT, "id")
+                .queryParam(QUERY_PARAM_PAGE, 1)
+                .toUriString();
+    }
+    private ProblemDTO extractProblemFromResponse(ProblemResponseWrapper responseWrapper, Integer problemId) {
+        return Optional.ofNullable(responseWrapper)
+                .map(ProblemResponseWrapper::getProblems)
+                .filter(problems -> !problems.isEmpty() && problems.get(0).getId().equals(problemId))
+                .map(problems -> problems.get(0))
+                .orElseThrow(() -> new RuntimeException("Problem with ID " + problemId + " not found"));
+    }
 
 }
