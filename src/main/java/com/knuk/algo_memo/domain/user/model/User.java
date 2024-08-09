@@ -29,6 +29,9 @@ public class User extends BaseEntityWithUpdate {
     @Column(nullable = false)
     private String nickName;
 
+    @Column(nullable = false)
+    private String password;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

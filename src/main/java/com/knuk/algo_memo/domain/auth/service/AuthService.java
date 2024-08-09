@@ -13,9 +13,6 @@ public interface AuthService {
      */
     AuthenticationToken login(String username, String password);
 
-
-    boolean join(UserDTO user);
-
     /**
      * 인증 토큰 갱신 메서드
      * @param oldToken 기존 인증 토큰
