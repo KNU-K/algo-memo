@@ -6,7 +6,7 @@ import lombok.Data;
 import java.time.LocalDateTime;
 
 @Data
-public class UserDto {
+public class UserDTO {
     private final Long id;
     private final String email;
     private final String name;
@@ -15,7 +15,7 @@ public class UserDto {
     private final LocalDateTime createdAt;
     private final LocalDateTime updatedAt;
 
-    public UserDto(User user) {
+    public UserDTO(User user) {
         this.id = user.getId();
         this.email = user.getEmail();
         this.name = user.getName();

@@ -3,7 +3,6 @@ package com.knuk.algo_memo.global.jwt;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
@@ -13,6 +12,7 @@ import java.util.Date;
 @Component
 @PropertySource("classpath:jwt.properties")
 public class JwtProvider {
+
     @Value("${jwt.secret.access}")
     private String accessSecretKey;
 
@@ -20,72 +20,66 @@ public class JwtProvider {
     private String refreshSecretKey;
 
     @Value("${jwt.expiration.access}")
-    private long accessExpiration;
+    private Long accessExpiration;
 
     @Value("${jwt.expiration.refresh}")
-    private long refreshExpiration;
+    private Long refreshExpiration;
 
-    @PostConstruct
-    protected void init() {
-        // Optionally initialize anything after the properties are injected
-    }
-
-    // Generate Access Token
+    // Access Token 생성
     public String generateAccessToken(String username) {
-        return Jwts.builder()
-                .setSubject(username)
-                .setExpiration(new Date(System.currentTimeMillis() + accessExpiration))
-                .signWith(SignatureAlgorithm.HS256, accessSecretKey)
-                .compact();
+        return generateToken(username, accessExpiration, accessSecretKey);
     }
 
-    // Generate Refresh Token
+    // Refresh Token 생성
     public String generateRefreshToken(String username) {
+        return generateToken(username, refreshExpiration, refreshSecretKey);
+    }
+
+    // 토큰 생성
+    private String generateToken(String username, long expiration, String secretKey) {
         return Jwts.builder()
                 .setSubject(username)
-                .setExpiration(new Date(System.currentTimeMillis() + refreshExpiration))
-                .signWith(SignatureAlgorithm.HS256, refreshSecretKey)
+                .setExpiration(new Date(System.currentTimeMillis() + expiration))
+                .signWith(SignatureAlgorithm.HS256, secretKey)
                 .compact();
     }
 
-    // Extract Claims from Token
+    // Access Token에서 사용자 이름 추출
+    public String getUsernameFromAccessToken(String token) {
+        return extractUsername(token, accessSecretKey);
+    }
+
+    // Refresh Token에서 사용자 이름 추출
+    public String getUsernameFromRefreshToken(String token) {
+        return extractUsername(token, refreshSecretKey);
+    }
+
+    // 토큰에서 사용자 이름 추출
+    private String extractUsername(String token, String secretKey) {
+        return getClaimsFromToken(token, secretKey).getSubject();
+    }
+
+    // Access Token 유효성 검사
+    public boolean validateAccessToken(String token) {
+        return validateToken(token, accessSecretKey);
+    }
+
+    // Refresh Token 유효성 검사
+    public boolean validateRefreshToken(String token) {
+        return validateToken(token, refreshSecretKey);
+    }
+
+    // 토큰 유효성 검사
+    private boolean validateToken(String token, String secretKey) {
+        Claims claims = getClaimsFromToken(token, secretKey);
+        return !claims.getExpiration().before(new Date());
+    }
+
+    // 토큰에서 Claims 추출
     private Claims getClaimsFromToken(String token, String secretKey) {
         return Jwts.parser()
-                .setSigningKey(secretKey)
+                .setSigningKey(secretKey.getBytes())
                 .parseClaimsJws(token)
                 .getBody();
     }
-
-    // Get Username from Access Token
-    public String getUsernameFromAccessToken(String token) {
-        Claims claims = getClaimsFromToken(token, accessSecretKey);
-        return claims.getSubject();
-    }
-
-    // Get Username from Refresh Token
-    public String getUsernameFromRefreshToken(String token) {
-        Claims claims = getClaimsFromToken(token, refreshSecretKey);
-        return claims.getSubject();
-    }
-
-    // Validate Access Token
-    public boolean validateAccessToken(String token) {
-        try {
-            Claims claims = getClaimsFromToken(token, accessSecretKey);
-            return !claims.getExpiration().before(new Date());
-        } catch (Exception e) {
-            return false;
-        }
-    }
-
-    // Validate Refresh Token
-    public boolean validateRefreshToken(String token) {
-        try {
-            Claims claims = getClaimsFromToken(token, refreshSecretKey);
-            return !claims.getExpiration().before(new Date());
-        } catch (Exception e) {
-            return false;
-        }
-    }
-
 }

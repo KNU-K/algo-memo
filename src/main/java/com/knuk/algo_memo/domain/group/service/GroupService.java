@@ -1,4 +1,5 @@
 package com.knuk.algo_memo.domain.group.service;
 
-public class GroupService {
+public interface GroupService {
+    void createGroup();
 }

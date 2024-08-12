@@ -1,7 +1,6 @@
 package com.knuk.algo_memo.domain.auth.service;
 
 import com.knuk.algo_memo.domain.auth.dto.AuthenticationToken;
-import com.knuk.algo_memo.domain.auth.dto.UserDTO;
 
 public interface AuthService {
 
