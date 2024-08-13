@@ -3,7 +3,6 @@ package com.knuk.algo_memo.domain.group;
 import com.knuk.algo_memo.domain.group.dto.GroupDTO;
 import com.knuk.algo_memo.domain.group.model.Group;
 import com.knuk.algo_memo.domain.group.repository.GroupRepository;
-import com.knuk.algo_memo.domain.group.service.GroupService;
 import com.knuk.algo_memo.domain.group.service.GroupServiceImpl;
 import com.knuk.algo_memo.domain.user.model.User;
 import com.knuk.algo_memo.domain.user.repository.UserRepository;
