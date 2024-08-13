@@ -1,13 +1,16 @@
-package com.knuk.algo_memo.api;
+package com.knuk.algo_memo.api.controller;
+
+import com.knuk.algo_memo.api.dto.AuthRequestDTO;
 
 import com.knuk.algo_memo.domain.auth.dto.AuthenticationToken;
 import com.knuk.algo_memo.domain.auth.service.AuthService;
-import lombok.RequiredArgsConstructor;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/auth")

@@ -2,6 +2,7 @@ package com.knuk.algo_memo.domain.usergroup.model;
 
 import com.knuk.algo_memo.domain.group.model.Group;
 import com.knuk.algo_memo.domain.user.model.User;
+import com.knuk.algo_memo.global.model.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,7 +14,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
-public class UserGroup {
+public class UserGroup extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;

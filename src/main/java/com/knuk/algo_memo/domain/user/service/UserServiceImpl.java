@@ -18,6 +18,10 @@ public class UserServiceImpl implements UserService{
         User user = userRepository.findByEmail(email).orElseThrow();
         return new UserDTO(user);
     }
+    public UserDTO findById(Long id) {
+        User user = userRepository.findById(id).orElseThrow();
+        return new UserDTO(user);
+    }
 
     @Override
     public UserDTO createUser(CreateUserCommand userCommand) {

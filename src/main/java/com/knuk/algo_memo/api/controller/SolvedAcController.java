@@ -1,4 +1,4 @@
-package com.knuk.algo_memo.api;
+package com.knuk.algo_memo.api.controller;
 
 import com.knuk.algo_memo.domain.solvedac.dto.ProblemDTO;
 import com.knuk.algo_memo.domain.solvedac.service.SolvedAcService;
@@ -14,12 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class SolvedAcController {
     private final SolvedAcService solvedAcService;
-    @GetMapping("/test")
-    public Long aaa(@AuthUser Long a){
-
-        return a;
-    }
-
     /**
      * @param id required
      *

@@ -1,28 +1,25 @@
 package com.knuk.algo_memo.domain.user.repository;
 
 import com.knuk.algo_memo.domain.user.model.User;
-import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.test.annotation.Rollback;
+
 
 import java.util.Optional;
-
 @DataJpaTest
 @DisplayName("UserRepository 테스트")
 @Slf4j
-
 public class UserRepositoryTest {
     @Autowired
     UserRepository userRepository;
 
     @Nested
     @DisplayName("User 저장 작업을 진행")
-    @Transactional
     class SaveUserWithUserRepository {
+
         @Test
         @DisplayName("정상적으로 저장되었을 떄")
         void succeedToSaveUser() {
@@ -31,6 +28,7 @@ public class UserRepositoryTest {
                     .email("k_anon3747")
                     .name("test")
                     .nickName("test")
+                    .password("asd")
                     .build();
 
             //when
@@ -41,6 +39,7 @@ public class UserRepositoryTest {
             Assertions.assertEquals(user.getName(), foundUser.getName());
             Assertions.assertEquals(user.getNickName(), foundUser.getNickName());
         }
+
         @Test
         @DisplayName("비정상적으로 저장되었을 때")
         void failToSaveUser() {
@@ -48,6 +47,7 @@ public class UserRepositoryTest {
             User user = User.builder()
                     .email("k_anon3747")
                     .nickName("test")
+                    .password("asd")
                     .build();
 
             // When & Then
@@ -71,6 +71,7 @@ public class UserRepositoryTest {
                             .email("k_anon3747")
                             .name("test")
                             .nickName("test")
+                            .password("asd")
                             .build());
             log.info("유저 엔티티 빌드 완료");
         }

@@ -1,4 +1,4 @@
-package com.knuk.algo_memo.api;
+package com.knuk.algo_memo.api.controller;
 
 import com.knuk.algo_memo.domain.user.dto.CreateUserCommand;
 import com.knuk.algo_memo.domain.user.dto.UserDTO;

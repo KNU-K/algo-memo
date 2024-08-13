@@ -1,10 +1,13 @@
 package com.knuk.algo_memo.domain.user.dto;
 
 import com.knuk.algo_memo.domain.user.model.User;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 
 import java.time.LocalDateTime;
-
+@Builder
+@AllArgsConstructor
 @Data
 public class UserDTO {
     private final Long id;
@@ -24,4 +27,6 @@ public class UserDTO {
         this.createdAt = user.getCreatedAt();
         this.updatedAt = user.getUpdatedAt();
     }
+
+
 }

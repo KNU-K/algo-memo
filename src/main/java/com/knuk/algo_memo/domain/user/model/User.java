@@ -1,5 +1,6 @@
 package com.knuk.algo_memo.domain.user.model;
 
+import com.knuk.algo_memo.domain.user.dto.UserDTO;
 import com.knuk.algo_memo.global.model.BaseEntityWithUpdate;
 import jakarta.persistence.*;
 import lombok.*;
@@ -16,6 +17,7 @@ import java.util.Objects;
 @AllArgsConstructor
 @ToString
 public class User extends BaseEntityWithUpdate {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -31,6 +33,18 @@ public class User extends BaseEntityWithUpdate {
 
     @Column(nullable = false)
     private String password;
+
+    public UserDTO toDTO(){
+        return UserDTO.builder()
+                .id(id)
+                .email(email)
+                .nickName(nickName)
+                .password(password)
+                .name(name)
+                .createdAt(getCreatedAt())
+                .updatedAt(getUpdatedAt())
+                .build();
+    }
 
     @Override
     public boolean equals(Object o) {

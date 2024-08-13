@@ -8,5 +8,6 @@ import org.springframework.stereotype.Service;
 public interface UserService {
 
     UserDTO findByEmail(String email);
+    UserDTO findById(Long id);
     UserDTO createUser(CreateUserCommand command);
 }

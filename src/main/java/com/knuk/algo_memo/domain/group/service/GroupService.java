@@ -1,5 +1,8 @@
 package com.knuk.algo_memo.domain.group.service;
 
+import com.knuk.algo_memo.domain.group.dto.GroupDTO;
+
 public interface GroupService {
-    void createGroup();
+     GroupDTO createGroup(Long id,String name) ;
+
 }

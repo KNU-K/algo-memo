@@ -1,4 +1,4 @@
-package com.knuk.algo_memo.api;
+package com.knuk.algo_memo.api.dto;
 
 
 import lombok.Data;
